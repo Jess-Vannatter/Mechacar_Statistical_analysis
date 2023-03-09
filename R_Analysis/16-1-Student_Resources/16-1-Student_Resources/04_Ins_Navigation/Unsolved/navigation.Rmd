@@ -1,0 +1,25 @@
+---
+title: "Navigation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Dependency
+```{r}
+library(tidyverse)
+```
+
+### Read in the data.csv file
+```{r}
+read_csv("../Resources/data.csv")
+
+```
+
+### Print out the top rows in the data.csv file  
+```{r}
+
+```
+

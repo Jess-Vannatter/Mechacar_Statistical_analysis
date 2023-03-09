@@ -1,0 +1,31 @@
+```{r}
+library(tidyverse)
+```
+
+
+
+```{r}
+# Read in the CSV file. 
+hair <- read.csv(file="hair.csv")
+```
+
+
+```{r}
+#  Plot the data using ggplot
+ggplot(hair,aes(x=factor(HairColour),y=Pain)) + geom_boxplot()
+```
+
+
+```{r}
+# Determine the p-value using ANOVA
+aov(Pain ~ factor(HairColour), data=hair)
+```
+
+```{r}
+summary(aov(Pain ~ factor(HairColour), data=hair))
+```
+
+
+```{r}
+```
+

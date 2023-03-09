@@ -1,0 +1,261 @@
+---
+title: "Practice"
+output: html_document
+date: "2023-03-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+#Import data set
+population_table <- read.csv('used_car_data.csv',check.names = F,stringsAsFactors = F)
+
+```
+
+```{r}
+#import dataset into ggplot2
+plt <- ggplot(population_table,aes(x=log10(Miles_Driven))) 
+```
+
+```{r}
+#visualize distribution using density plot
+plt + geom_density()
+```
+```{r}
+#randomly sample 50 data points
+sample_table <- population_table %>% sample_n(50)
+```
+
+
+```{r}
+#import dataset into ggplot2
+plt1 <- ggplot(sample_table,aes(x=log10(Miles_Driven)))
+```
+
+```{r}
+#visualize distribution using density plot
+plt1 + geom_density()
+```
+```{r}
+#compare sample versus population means
+t.test(log10(sample_table$Miles_Driven),mu=mean(log10(population_table$Miles_Driven)))
+```
+
+```{r}
+#generate 50 randomly sampled data points
+sample_table <- population_table %>% sample_n(50) 
+```
+
+```{r}
+#generate another 50 randomly sampled data points
+sample_table2 <- population_table %>% sample_n(50)
+```
+
+```{r}
+#compare means of two samples
+t.test(log10(sample_table$Miles_Driven),log10(sample_table2$Miles_Driven))
+```
+
+```{r}
+#import dataset
+mpg_data <- read.csv('mpg_modified.csv')
+
+```
+
+```{r}
+#select only data points where the year is 1999
+mpg_1999 <- mpg_data %>% filter(year==1999)
+```
+
+```{r}
+#select only data points where the year is 2008
+mpg_2008 <- mpg_data %>% filter(year==2008)
+```
+
+```{r}
+#compare the mean difference between two samples
+t.test(mpg_1999$hwy,mpg_2008$hwy,paired = T)
+```
+
+```{r}
+#filter columns from mtcars dataset
+mtcars_filt <- mtcars[,c("hp","cyl")]
+```
+
+
+```{r}
+#convert numeric column to factor
+mtcars_filt$cyl <- factor(mtcars_filt$cyl)
+```
+
+
+```{r}
+#compare means across multiple levels
+aov(hp ~ cyl,data=mtcars_filt)
+```
+
+
+```{r}
+summary(aov(hp ~ cyl,data=mtcars_filt))
+```
+
+
+```{r}
+head(mtcars)
+```
+
+
+```{r}
+#import dataset into ggplot2
+plt <- ggplot(mtcars,aes(x=hp,y=qsec))
+```
+
+
+```{r}
+#create scatter plot
+plt + geom_point()
+```
+
+
+```{r}
+#calculate correlation coefficient
+cor(mtcars$hp,mtcars$qsec)
+```
+```{r}
+#read in dataset
+used_cars <- read.csv('used_car_data.csv', stringsAsFactors = F)
+head(used_cars)
+```
+
+
+```{r}
+#import dataset into ggplot2
+plt3 <- ggplot(used_cars,aes(x=Miles_Driven,y=Selling_Price))
+```
+
+
+```{r}
+#create a scatter plot
+plt3 + geom_point()
+```
+
+
+```{r}
+#calculate correlation coefficient
+cor(used_cars$Miles_Driven,used_cars$Selling_Price)
+```
+
+
+```{r}
+#convert data frame into numeric matrix
+used_matrix <- as.matrix(used_cars[,c("Selling_Price","Present_Price","Miles_Driven")])
+cor(used_matrix)
+```
+
+
+```{r}
+#create linear model
+lm(qsec ~hp,mtcars)
+```
+
+
+```{r}
+#summarize linear model
+summary(lm(qsec~hp,mtcars))
+```
+```{r}
+#create linear model
+model <- lm(qsec ~ hp,mtcars)
+```
+
+
+```{r}
+#determine y-axis values from linear model
+yvals <- model$coefficients['hp']*mtcars$hp +
+  model$coefficients['(Intercept)']
+```
+
+
+```{r}
+#import dataset into ggplot2
+plt4 <- ggplot(mtcars,aes(x=hp,y=qsec))
+```
+
+```{r}
+#plot scatter and linear model
+plt4 + geom_point() + geom_line(aes(y=yvals), color = "red")
+```
+
+```{r}
+#generate multiple linear regression model
+lm(qsec ~ mpg + disp + drat + wt + hp,data=mtcars)
+```
+
+
+```{r}
+#summarize linear model
+summary(lm(qsec ~ mpg + disp + drat + wt + hp,data=mtcars))
+```
+
+
+```{r}
+#create linear model
+lm(mpg ~ hp + wt + cyl + drat,data=mtcars)
+```
+
+```{r}
+#summarize linear model
+summary(lm(mpg ~ hp + wt + cyl + drat,data=mtcars))
+```
+
+
+```{r}
+#generate contingency table
+table(mpg$class,mpg$year)
+```
+
+
+```{r}
+#generate contingency table
+tbl <- table(mpg$class,mpg$year)
+```
+
+
+```{r}
+#compare categorical distributions
+chisq.test(tbl)
+```
+
+
+
+
+
+
+
+
