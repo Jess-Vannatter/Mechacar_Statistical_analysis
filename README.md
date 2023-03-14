@@ -1,4 +1,4 @@
-# Mechacar_Statistical_analysis
+# *Mechacar_Statistical_analysis*
 
 # Linear Regression to Predict MPG
 ![Linear_Regression _predict_MPG](https://user-images.githubusercontent.com/117245167/224563014-07b15c90-8585-4994-8def-4617bd6656aa.png)
